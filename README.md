@@ -53,5 +53,3 @@ Open your web browser and navigate to http://localhost:5000 (or the appropriate 
 #### Contributing
 
 Contributions to the Recipe Generator project are welcome! If you find any issues or want to add new features, please open an issue or submit a pull request with your changes.
-
-#by Neal Mick
