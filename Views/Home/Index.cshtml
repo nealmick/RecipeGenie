@@ -1,0 +1,110 @@
+@model List<RecipeGenerator.Models.Recipe>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+ #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px); /* Applies a blur effect to the background */
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+#overlay-content {
+    display: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.2s; /* Delay of 0.2s */
+    background-color: rgba(255, 255, 255, 1); /* Added background color for the content */
+    color:#333;
+    padding: 2rem; /* Added padding for better spacing */
+    border-radius: 8px; /* Added border-radius for rounded corners */
+}
+
+#overlay-content.show {
+    opacity: 1;
+}
+#Prompt {
+  max-width: 650px;
+  width: 85vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 100, 200, 0.3), 0 0 6px rgba(0, 100, 200, 0.3), 0 0 9px rgba(0, 100, 200, 0.3);
+  transition: box-shadow 0.5s ease-in-out, box-shadow-color 0.5s ease-in-out;
+}
+
+#Prompt:focus {
+  box-shadow: 0 0 6px rgba(0, 150, 255, 0.4), 0 0 12px rgba(0, 150, 255, 0.4), 0 0 18px rgba(0, 150, 255, 0.4);
+}
+.btn-primary {
+  box-shadow: 0 0 3px rgba(0, 100, 200, 0.2), 0 0 6px rgba(0, 100, 200, 0.2);
+  transition: box-shadow 0.5s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 6px rgba(0, 150, 255, 0.4), 0 0 12px rgba(0, 150, 255, 0.4);
+}
+</style>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">🪄 Welcome to Recipe Genie 🧞</h1>
+        <p class="lead">Enter ingredients or the type of dish you want to make, and let AI create a recipe plan for you!</p>
+        <form id="recipeForm" asp-controller="Recipe" asp-action="Create" method="post">
+            <textarea class="form-control" style="max-width:650px;width:85vw;margin-left:auto;margin-right:auto;" id="Prompt" name="Prompt" placeholder="Enter ingredients or dish details"></textarea>
+            <button type="submit" class="btn btn-lg btn-primary mt-3"><i class="fa-duotone fa-sparkles"></i> Create Recipe</button>
+        </form>
+        <!-- Overlay -->
+       <div id="overlay"></div>
+        <div id="overlay-content" style="padding:50px">
+            <h2>We are preparing your recipe...</h2>
+            <p style="display:inline;width:200px;text-align:center;">this should take about 15-20 seconds </p>
+            <div class="mt-2 mb-2"id="progressText" style="min-height:24px;"></div>
+
+            <img style="display:none;margin-left:auto;margin-right:auto;height:300px" id="loading-image" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmlwZTJoaDRpemlqZjdsZjlweDRqY21yd3c3NjJjd2RrMmxiMmRtdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hUL5R6B4HYoXADpnvJ/giphy.webp"></img>
+            <div id="countdown" style="text-align:center;margin-top:25px;display:none;">0</div>
+        </div>
+        <!-- Displaying the last 10 recipes -->
+        <div class="mt-5">
+        <hr style="color:rgba(0,0,0,.4)">
+            <h2 class="text-muted" >The genie's latest creations</h2>
+            <div class="row mt-5">
+                @foreach (var recipe in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <a href="@Url.Action("Index", "Detail", new { id = recipe.Id })" class="no-style-link">
+                            <img src="@recipe.ImageUrl" class="img-fluid rounded shadow" style="max-height: 250px; border-radius:25px !important;">
+                            <h5 class="card-title mt-3">@recipe.Name</h5>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: grid; place-items: center;">
+    <a class="mb-5 mt-3 btn-lg btn btn-outline-primary" href="@Url.Action("All", "List")"><i class="fa-solid fa-list"></i> View More Recipes</a>
+</div>

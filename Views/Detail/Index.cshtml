@@ -1,0 +1,32 @@
+@model RecipeGenerator.Models.Recipe
+
+@{
+    ViewData["Title"] = "Recipe Details";
+    var cultureInfo = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+    var dateTimeFormat = "{0:MMMM dd, yyyy 'at' hh:mm tt}";
+}
+
+<div class="container" style="margin-top:10vh">
+    <div class="row">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="col-md-5" style="padding-top:15px;padding-right:20px">
+                <img src="@Model.ImageUrl" alt="Recipe Image" class="img-fluid rounded shadow" style="max-height: 500px;
+                 border-radius:25px !important;"/>
+            </div>
+        }
+        <div id="recipe-instructions" class="col-md-7 mt-1" style="padding-left:25px;padding-bottom:10vh;border-left:1px solid rgba(0,0,0,.1)">
+            <h1 class="display-4">@Model.Name</h1>
+            <hr/>
+            <div>
+                <p>@Html.Raw(Model.Content.Replace("\n", "<br/>"))</p>
+
+                <h6>Prompt:</h6>
+                <p>@Html.Raw(Model.Prompt.Replace("\n", "<br/>"))</p>
+                <h6>Created:</h6>
+                <p>@String.Format(dateTimeFormat, Model.Timestamp.ToLocalTime())</p>
+
+            </div>
+        </div>
+    </div>
+</div>

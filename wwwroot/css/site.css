@@ -1,0 +1,79 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+@model RecipeGenerator.Models.Recipe @{
+ ViewData["Title"]="Recipe Details";
+}
+
+@media (max-width: 768px) {
+    #recipe-instructions {
+        margin-top: 2vh !important;
+        border-left: none !important;
+    }
+}
+
+.nav-item {
+    margin-right: 25px;
+    margin-left: 10px;
+}
+
+.navbar-brand {
+    font-family: 'bradley hand itc', 'Comic Sans MS', cursive;
+    font-weight: bold;
+    color: #333;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+    border-radius: 10px;
+    height: 55px;
+    vertical-align: middle;
+}
+
+.no-style-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.default-link {
+    color: blue !imporant;
+    text-decoration: none;
+}
+
+.default-link:hover {
+    text-decoration: underline;
+}
+
+
+
+<div class="container" style="margin-top:10vh"><div class="row">@if ( !string.IsNullOrEmpty(Model.ImageUrl)) {
+    <div class="col-md-4" style="padding-top:15px"><img src="@Model.ImageUrl" alt="Recipe Image" class="img-fluid rounded shadow" style="max-height: 400px;" /></div>
+}
+
+<div id="recipe-instructions" class="col-md-8 mt-1" style="padding-bottom:10vh;border-left:1px solid rgba(0,0,0,.1)"><h1 class="display-4">@Model.Name</h1><hr/><div><h2>Instructions:</h2><p>@Html.Raw(Model.Content.Replace("\n", "<br/>"))</p></div></div></div></div>

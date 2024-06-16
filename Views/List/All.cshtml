@@ -1,0 +1,27 @@
+@model IEnumerable<RecipeGenerator.Models.Recipe>
+@{
+    ViewData["Title"] = "All Recipes";
+}
+
+<h1>More Recipes</h1>
+<div class="list-group" style="border-radius:15px">
+    @foreach (var recipe in Model)
+    {
+        <a href="@Url.Action("Index", "Detail", new { id = recipe.Id })" class="list-group-item list-group-item-action">
+            <div class="d-flex align-items-start">
+                @if (!string.IsNullOrEmpty(recipe.ImageUrl))
+                {
+                    <img src="@recipe.ImageUrl" alt="Recipe Image" class="img-thumbnail" style="padding:0px !important; border-radius:20px !important; width:100px; height:100px; margin-right:15px; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                }
+                <div class="flex-grow-1">
+                    <h5 class="mb-1">@recipe.Name</h5>
+                    @if (!string.IsNullOrEmpty(recipe.Content))
+                    {
+                        <p class="mb-1">@recipe.Content.Substring(0, Math.Min(100, recipe.Content.Length))...</p>
+                    }
+                    <small>Created on @recipe.Timestamp.ToString("MMMM dd, yyyy")</small>
+                </div>
+            </div>
+        </a>
+    }
+</div>
