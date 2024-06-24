@@ -1,5 +1,5 @@
 # Recipe Genie
-[Visit Recipe Genie](https://recipe-genie.xyz/)
+# [Visit Recipe Genie](https://recipe-genie.xyz/)
 
 <img src="https://recipe-genie.xyz/recipe-round.png" alt="Recipe Genie Logo" width="50%" style="display: block; margin: auto;">
 
