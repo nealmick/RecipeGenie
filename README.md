@@ -1,7 +1,9 @@
 # Recipe Genie
-# [Visit Recipe Genie](https://recipe-genie.xyz/)
 
-<img src="https://recipe-genie.xyz/recipe-round.png" alt="Recipe Genie Logo" width="50%" style="display: block; margin: auto;">
+
+<img width="256" height="256" alt="recipe-round" src="https://github.com/user-attachments/assets/021ab72f-fea1-46fd-b98e-5a46a3d00149"/>
+
+# [Visit Recipe Genie](https://recipe-genie.xyz/)
 
 **Recipe Genie** is a cutting-edge web application that harnesses the power of AI to revolutionize the way you cook. With Recipe Genie, just tell us what ingredients you have or the type of dish you're craving, and watch as our application generates not just a recipe, but a visual preview of your final dish.
 
